@@ -108,8 +108,8 @@ void modinfo_main(void)
       struct utsname uts;
 
       if (uname(&uts) < 0) perror_exit("bad uname");
-      if (snprintf(toybuf, sizeof(toybuf), "%s/vendor/lib/modules",
-          (toys.optflags & FLAG_b) ? TT.b : "" >= sizeof(toybuf))
+      if (snprintf(toybuf, sizeof(toybuf), "%s/lib/modules/%s",
+          (toys.optflags & FLAG_b) ? TT.b : "") >= sizeof(toybuf))
             perror_exit("basedir/kernrelease too long");
       dirtree_read(toybuf, check_module);
     }
