@@ -13,7 +13,7 @@ config MODINFO
     usage: modinfo [-0] [-b basedir] [-k kernrelease] [-F field] [modulename...]
 
     Display module fields for all specified modules, looking in
-    <basedir>/lib/modules/<kernrelease>/ (kernrelease defaults to uname -r).
+    <basedir>vendor/lib/modules.
 */
 
 #define FOR_modinfo
@@ -108,9 +108,8 @@ void modinfo_main(void)
       struct utsname uts;
 
       if (uname(&uts) < 0) perror_exit("bad uname");
-      if (snprintf(toybuf, sizeof(toybuf), "%s/lib/modules/%s",
-          (toys.optflags & FLAG_b) ? TT.b : "",
-          (toys.optflags & FLAG_k) ? TT.k : uts.release) >= sizeof(toybuf))
+      if (snprintf(toybuf, sizeof(toybuf), "%s/vendor/lib/modules",
+          (toys.optflags & FLAG_b) ? TT.b : "" >= sizeof(toybuf))
             perror_exit("basedir/kernrelease too long");
       dirtree_read(toybuf, check_module);
     }
