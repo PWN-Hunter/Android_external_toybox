@@ -518,7 +518,7 @@ void modprobe_main(void)
   if (!TT.dirs) {
     uname(&uts);
     TT.dirs = xzalloc(sizeof(struct arg_list));
-    TT.dirs->arg = xmprintf("/lib/modules/%s", uts.release);
+    TT.dirs->arg = xmprintf("/vendor/lib/modules");
   }
 
   // modules.dep processing for dependency check.
